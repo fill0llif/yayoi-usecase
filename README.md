@@ -5,7 +5,7 @@ Use case project for _Yayoi_ GUI annotation framework
 
 	ceylon compile
 	
-## Use Case
+# Use Case
 
 App entry point:
 
