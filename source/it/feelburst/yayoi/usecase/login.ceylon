@@ -11,7 +11,8 @@ import it.feelburst.yayoi.marker {
 	layout,
 	container,
 	onActionPerformed,
-	withLayout
+	withLayout,
+	setLookAndFeel
 }
 
 import java.awt.event {
@@ -28,8 +29,13 @@ import javax.swing {
 		preferredSize,
 		defaultSize
 	},
-	JButton
+	JButton,
+	UIManager
 }
+
+setLookAndFeel
+shared String lookAndFeel() =>
+	UIManager.systemLookAndFeelClassName;
 
 window
 title("Login")

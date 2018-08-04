@@ -31,6 +31,10 @@ shared class App() satisfies Runnable {
 Components file:
 
 ```ceylon
+setLookAndFeel
+shared String lookAndFeel() =>
+	UIManager.systemLookAndFeelClassName;
+
 window
 title("Login")
 size(270,150)
