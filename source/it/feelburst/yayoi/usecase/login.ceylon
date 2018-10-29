@@ -80,18 +80,18 @@ shared object loginButtonListener satisfies ActionListener {
 
 doLayout("login.panel")
 shared void doPanelLayout(
-	GroupLayout panelLayout, 
+	GroupLayout panelGroupLayout, 
 	JPanel panel, 
 	JTextField emailTextField,
 	JButton loginButton, 
 	JPasswordField passwordField) {
-	panelLayout.setHorizontalGroup(
-		panelLayout.createParallelGroup()
+	panelGroupLayout.setHorizontalGroup(
+		panelGroupLayout.createParallelGroup()
 		.addComponent(emailTextField, preferredSize, defaultSize, preferredSize)
 		.addComponent(passwordField, preferredSize, defaultSize, preferredSize)
 		.addComponent(loginButton, preferredSize, defaultSize, preferredSize));
-	panelLayout.setVerticalGroup(
-		panelLayout.createSequentialGroup()
+	panelGroupLayout.setVerticalGroup(
+		panelGroupLayout.createSequentialGroup()
 		.addComponent(emailTextField, preferredSize, defaultSize, preferredSize)
 		.addComponent(passwordField, preferredSize, defaultSize, preferredSize)
 		.addComponent(loginButton, preferredSize, defaultSize, preferredSize));

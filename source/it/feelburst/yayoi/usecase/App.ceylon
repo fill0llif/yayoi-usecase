@@ -16,8 +16,13 @@ import javax.swing {
 import org.springframework.beans.factory.annotation {
 	autowired
 }
+import it.feelburst.yayoi.model {
+	swingFramework
+}
 
-yayoi({`package it.feelburst.yayoi.usecase`})
+yayoi(
+	{`package it.feelburst.yayoi.usecase`},
+	`value swingFramework`)
 shared class App() satisfies Runnable {
 	
 	autowired
