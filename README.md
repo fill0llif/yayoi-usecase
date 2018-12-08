@@ -11,13 +11,18 @@ App entry point:
 
 ```ceylon
 shared void run() =>
-	Yayoi(`class App`).run();
+	Yayoi(`class App`,
+	() {
+		logger(`package it.feelburst.yayoi.model.window.swing`).priority = debug;
+	}).run();
 ```
 
 User app:
 
 ```ceylon
-yayoi({`package it.feelburst.yayoi.usecase`})
+yayoi(
+	{`package it.feelburst.yayoi.usecase`},
+	`value swingFramework`)
 shared class App() satisfies Runnable {
 	
 	autowired
@@ -36,19 +41,21 @@ shared String lookAndFeel() =>
 	UIManager.systemLookAndFeelClassName;
 
 window
-title("Login")
 size(270,150)
 centered
 exitOnClose
-shared object login extends JFrame() {}
+shared JFrame login() =>
+	JFrame("Takane");
 
 container
-parent("login")
-withLayout("panelGroupLayout")
-shared object panel extends JPanel() {}
+parent("login()")
+withLayout("panelGroupLayout()")
+shared JPanel panel() =>
+	JPanel();
 	
 layout
-shared GroupLayout panelGroupLayout {
+shared GroupLayout panelGroupLayout(
+	named("login().panel()") JPanel panel) {
 	value groupLayout = GroupLayout(panel);
 	groupLayout.autoCreateContainerGaps = true;
 	groupLayout.autoCreateGaps = true;
@@ -56,15 +63,15 @@ shared GroupLayout panelGroupLayout {
 }
 	
 component
-parent("login.panel")
+parent("login().panel()")
 shared object emailTextField extends JTextField(20) {}
 	
 component
-parent("login.panel")
+parent("login().panel()")
 shared object passwordField extends JPasswordField(20) {}
 	
 component
-parent("login.panel")
+parent("login().panel()")
 onActionPerformed("loginButtonListener")
 shared object loginButton extends JButton("Ok") {}
 	
@@ -76,20 +83,20 @@ shared object loginButtonListener satisfies ActionListener {
 	}
 }
 
-doLayout("login.panel")
+doLayout("login().panel()")
 shared void doPanelLayout(
-	GroupLayout panelLayout, 
-	JPanel panel, 
-	JTextField emailTextField,
-	JButton loginButton, 
-	JPasswordField passwordField) {
-	panelLayout.setHorizontalGroup(
-		panelLayout.createParallelGroup()
+	named("panelGroupLayout()") GroupLayout panelGroupLayout, 
+	named("login().panel()") JPanel panel, 
+	named("login().panel().emailTextField") JTextField emailTextField,
+	named("login().panel().loginButton") JButton loginButton, 
+	named("login().panel().passwordField") JPasswordField passwordField) {
+	panelGroupLayout.setHorizontalGroup(
+		panelGroupLayout.createParallelGroup()
 		.addComponent(emailTextField, preferredSize, defaultSize, preferredSize)
 		.addComponent(passwordField, preferredSize, defaultSize, preferredSize)
 		.addComponent(loginButton, preferredSize, defaultSize, preferredSize));
-	panelLayout.setVerticalGroup(
-		panelLayout.createSequentialGroup()
+	panelGroupLayout.setVerticalGroup(
+		panelGroupLayout.createSequentialGroup()
 		.addComponent(emailTextField, preferredSize, defaultSize, preferredSize)
 		.addComponent(passwordField, preferredSize, defaultSize, preferredSize)
 		.addComponent(loginButton, preferredSize, defaultSize, preferredSize));
@@ -108,4 +115,13 @@ shared class DefaultWindowClosedAdapter() extends WindowAdapter() {
 	shared actual void windowClosing(WindowEvent? e) =>
 		eventPublisher.publishEvent(ShutdownRequested(this));
 }
+```
+
+Layout construction on container declaration:
+
+```ceylon
+container
+parent("main()")
+shared JPanel panel() =>
+	JPanel(GridLayout(1,1));
 ```

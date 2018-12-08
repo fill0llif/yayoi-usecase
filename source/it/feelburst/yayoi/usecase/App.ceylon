@@ -1,6 +1,9 @@
 import it.feelburst.yayoi.marker {
 	yayoi
 }
+import it.feelburst.yayoi.model.impl {
+	swingFramework
+}
 import it.feelburst.yayoi.model.window {
 	Window
 }
@@ -15,9 +18,6 @@ import javax.swing {
 
 import org.springframework.beans.factory.annotation {
 	autowired
-}
-import it.feelburst.yayoi.model {
-	swingFramework
 }
 
 yayoi(
