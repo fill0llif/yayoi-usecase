@@ -42,7 +42,7 @@ size(270,150)
 centered
 exitOnClose
 shared JFrame login() =>
-	JFrame("Takane");
+	JFrame("Login");
 
 container
 parent("login()")
